@@ -13,11 +13,16 @@ namespace LiveVol.UI
     {
         private readonly List<LiveVolData> _data;
         private readonly Browser _browser;
-        public MainWindow(Browser browser, List<LiveVolData> data)
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        public MainWindow(Browser browser, List<LiveVolData> data):this()
         {
             _browser = browser;
             _data = data;
-            InitializeComponent();
         }
 
         private async void MainWindow_OnLoaded(object sender, RoutedEventArgs e)

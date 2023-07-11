@@ -28,7 +28,7 @@ namespace LiveVol.UI
         {
             var cfg = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json").Build();
-            services.AddSingleton<MainWindow>();
+            services.AddSingleton(e => new MainWindow(e.GetService<Browser>(), e.GetService<List<LiveVolData>>()));
             services.AddSingleton<Browser>();
             services.AddSingleton<IConfiguration>(cfg);
             var options = new EdgeOptions();
