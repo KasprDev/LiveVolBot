@@ -1,18 +1,23 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Timers;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
+using TraderTape;
 
-namespace TraderTape
+namespace LiveVol.UI.Service
 {
     public class Browser
     {
         public EdgeDriver? Driver;
-        public List<LiveVolData> GridRows;
-
         private SavedSession? _session;
         private System.Timers.Timer _timer;
+        public List<LiveVolData> GridRows = new List<LiveVolData>();
+
         public async Task Initialize()
         {
             var options = new EdgeOptions() { };
@@ -21,7 +26,34 @@ namespace TraderTape
             Driver = new EdgeDriver(options);
             Driver.Url = "https://pro.livevol.com";
 
-            await Login();
+            //if (File.Exists("browser.json"))
+            //{
+            //    var js = (IJavaScriptExecutor)Driver!;
+            //    var browserData = JsonConvert.DeserializeObject<SavedSession>(await File.ReadAllTextAsync("browser.json"))!;
+
+            //    _session = browserData;
+
+            //    foreach (var localStorage in browserData.LocalStorage)
+            //    {
+            //        js.ExecuteScript($"localStorage.setItem('{localStorage.Key}', '{localStorage.Value}');");
+            //    }
+
+            //    foreach (var sessionStorage in browserData.SessionStorage)
+            //    {
+            //        js.ExecuteScript($"sessionStorage.setItem('{sessionStorage.Key}', '{sessionStorage.Value}');");
+            //    }
+
+            //    foreach (var cookie in browserData.Cookies)
+            //    {
+            //        Driver!.Manage().Cookies.AddCookie(new Cookie(cookie.Name, cookie.Value, cookie.Domain, cookie.Path,
+            //            cookie.Expiry));
+            //    }
+
+            //    Driver.Url = $"https://pro.livevol.com";
+            //}
+
+            //if (_session == null)
+                await Login();
 
             var tabInput = Driver!.FindElements(By.CssSelector("span[class*='TabbedView__tabTitle']")).FirstOrDefault(x => x.Text.Contains("Trade Tape"));
             tabInput.Click();
@@ -37,9 +69,6 @@ namespace TraderTape
         {
             try
             {
-                var s = new Stopwatch();
-                s.Start();
-
                 var grid = Driver!.FindElement(By.CssSelector("div[class*='TradeTape__grid'"))
                     .FindElements(By.CssSelector("div[data-qa='tradeTapeRow'"));
 
@@ -69,15 +98,10 @@ namespace TraderTape
                 }
 
                 GridRows = gridData;
-
-                s.Stop();
-
-                Debug.WriteLine(s.Elapsed.TotalMilliseconds);
-                Trace.WriteLine(s.Elapsed.TotalMilliseconds);
             }
             catch (Exception ex)
             {
-                // Console.WriteLine(ex.ToString());
+                Console.WriteLine(ex.ToString());
             }
             finally
             {
