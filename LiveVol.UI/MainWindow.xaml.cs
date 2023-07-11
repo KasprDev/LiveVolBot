@@ -1,8 +1,8 @@
-﻿using System.Timers;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Timers;
 using System.Windows;
-using System.Windows.Controls;
 using LiveVol.UI.Service;
-using TraderTape;
 
 namespace LiveVol.UI
 {
@@ -11,31 +11,28 @@ namespace LiveVol.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Browser _browser;
-        public MainWindow()
+        private readonly List<LiveVolData> _data;
+        private readonly Browser _browser;
+        public MainWindow(Browser browser, List<LiveVolData> data)
         {
+            _browser = browser;
+            _data = data;
             InitializeComponent();
         }
 
         private async void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            _browser = new Browser();
             await _browser.Initialize();
-
-            var t = new Timer()
-            {
-                Interval = 1000
-            };
-
+            var t = new Timer() { Interval = 1000 };
             t.Elapsed += T_Elapsed;
             t.Start();
         }
 
-        private void T_Elapsed(object? sender, ElapsedEventArgs e)
+        private void T_Elapsed(object sender, ElapsedEventArgs e)
         {
             MainGrid.Dispatcher.Invoke(() =>
             {
-                MainGrid.ItemsSource = _browser.GridRows;
+                MainGrid.ItemsSource = _data.ToArray().ToList();
             });
         }
     }
