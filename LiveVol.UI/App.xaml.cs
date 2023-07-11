@@ -48,7 +48,7 @@ namespace LiveVol.UI
             services.AddSingleton<IConfiguration>(cfg);
 
             var eds = EdgeDriverService.CreateDefaultService();
-#if DEBUG
+#if !DEBUG
             eds.HideCommandPromptWindow = true;
 #endif
             services.AddSingleton(new EdgeDriver(eds, CreateOptions()));
