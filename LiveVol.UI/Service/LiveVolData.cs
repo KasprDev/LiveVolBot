@@ -15,5 +15,16 @@
         public string Market { get; set; }
         public string TradeIV { get; set; }
         public string UnderlyingTradePrice { get; set; }
+        public int HashCode { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj.GetHashCode() == this.HashCode;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode;
+        }
     }
 }

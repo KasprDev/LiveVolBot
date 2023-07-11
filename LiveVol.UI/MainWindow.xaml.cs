@@ -11,7 +11,7 @@ namespace LiveVol.UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly List<LiveVolData> _data;
+        private readonly HashSet<LiveVolData> _data;
         private readonly Browser _browser;
 
         public MainWindow()
@@ -19,7 +19,7 @@ namespace LiveVol.UI
             InitializeComponent();
         }
 
-        public MainWindow(Browser browser, List<LiveVolData> data):this()
+        public MainWindow(Browser browser, HashSet<LiveVolData> data):this()
         {
             _browser = browser;
             _data = data;
@@ -35,9 +35,10 @@ namespace LiveVol.UI
 
         private void T_Elapsed(object sender, ElapsedEventArgs e)
         {
+            var items = _data.ToArray().ToList();
             MainGrid.Dispatcher.Invoke(() =>
             {
-                MainGrid.ItemsSource = _data.ToArray().ToList();
+                MainGrid.ItemsSource = items;
             });
         }
     }

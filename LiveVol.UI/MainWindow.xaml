@@ -10,21 +10,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <DataGrid x:Name="MainGrid" dgx:DataGridFilter.IsAutoFilterEnabled="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Date}"  Header="Date"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Time}" Header="Time"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Symbol}" Header="Symbol"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Option}" Header="Option"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Qty}" Header="Qty"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Price}" Header="Price"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Theo}" Header="Theo"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Exchange}" Header="Exchange"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding ISE}" Header="ISE"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Condition}" Header="Condition"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Market}" Header="Market"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding TradeIV}" Header="TradeIV"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding UnderlyingTradePrice}" Header="Underlying Trade Price"></DataGridTextColumn>
-            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>
