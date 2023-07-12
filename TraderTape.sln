@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraderTape", "TraderTape\TraderTape.csproj", "{588CF1A3-C3A0-4604-8CBF-AC2606C95A36}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveVol.UI", "LiveVol.UI\LiveVol.UI.csproj", "{1F2B5EF0-2751-4B24-A1D4-08B4178227E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveVol.UI", "LiveVol.UI\LiveVol.UI.csproj", "{1F2B5EF0-2751-4B24-A1D4-08B4178227E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{588CF1A3-C3A0-4604-8CBF-AC2606C95A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{588CF1A3-C3A0-4604-8CBF-AC2606C95A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{588CF1A3-C3A0-4604-8CBF-AC2606C95A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{588CF1A3-C3A0-4604-8CBF-AC2606C95A36}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1F2B5EF0-2751-4B24-A1D4-08B4178227E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1F2B5EF0-2751-4B24-A1D4-08B4178227E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F2B5EF0-2751-4B24-A1D4-08B4178227E7}.Release|Any CPU.ActiveCfg = Release|Any CPU

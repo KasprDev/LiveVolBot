@@ -32,7 +32,7 @@ namespace LiveVol.UI
                 .MinimumLevel.Debug()
                 .WriteTo.Debug()
 #endif
-#if !DEBUG
+#if !DEBUG 
                 .MinimumLevel.Warning()
 #endif 
                 .WriteTo.Console()
@@ -43,7 +43,7 @@ namespace LiveVol.UI
                 .AddJsonFile("appsettings.json").Build();
 
             services.AddLogging(bld => bld.AddSerilog(logger));
-            services.AddSingleton(e => new MainWindow(e.GetService<Browser>(), e.GetService<HashSet<LiveVolData>>()));
+            services.AddSingleton(e => new MainWindow(e.GetService<Browser>()));
             services.AddSingleton<Browser>();
             services.AddSingleton<IConfiguration>(cfg);
 
@@ -52,7 +52,6 @@ namespace LiveVol.UI
             eds.HideCommandPromptWindow = true;
 #endif
             services.AddSingleton(new EdgeDriver(eds, CreateOptions()));
-            services.AddSingleton<HashSet<LiveVolData>>();
         }
 
         private static EdgeOptions CreateOptions()
@@ -60,8 +59,8 @@ namespace LiveVol.UI
             var options = new EdgeOptions();
             options.AddArgument(
                 "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.67");
-            options.AddArgument("--headless=new");
-            options.AddArgument("--window-size=2560,3000");
+            //options.AddArgument("--headless=new");
+            //options.AddArgument("--window-size=2560,3000");
             return options;
         }
 
