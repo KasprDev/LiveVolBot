@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using OpenQA.Selenium.Edge;
 
 using System;
-using System.Collections.Generic;
 using System.Windows;
 
 using Serilog;
@@ -56,9 +55,12 @@ namespace LiveVol.UI
 
         private static EdgeOptions CreateOptions()
         {
+            var cfg = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json").Build();
+
+
             var options = new EdgeOptions();
-            options.AddArgument(
-                "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.67");
+            options.AddArgument($"--user-agent={cfg["UserAgent"]}");
             options.AddArgument("--headless=new");
             options.AddArgument("--window-size=2560,3000");
             return options;
