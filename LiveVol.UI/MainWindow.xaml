@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-  
-        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True" x:Name="MainGrid" ItemsSource="{Binding CollectionView, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" dgx:DataGridFilter.IsAutoFilterEnabled="True" EnableColumnVirtualization="True" x:Name="MainGrid" ItemsSource="{Binding CollectionView, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
                   VirtualizingStackPanel.VirtualizationMode="Standard"
                   ScrollViewer.HorizontalScrollBarVisibility="Visible"
                   VirtualizingPanel.ScrollUnit="Pixel"

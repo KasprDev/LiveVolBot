@@ -26,6 +26,11 @@ namespace LiveVol.UI
         public MainWindow()
         {
             InitializeComponent();
+            UpdateList();
+        }
+
+        private void UpdateList()
+        {
             CollectionView = CollectionViewSource.GetDefaultView(_data);
             CollectionView.SortDescriptions.Add(
                 new SortDescription("Time", ListSortDirection.Descending));
@@ -55,7 +60,8 @@ namespace LiveVol.UI
             try
             {
                 data.ForEach(x => _data.Add(x));
-                MainGrid.Dispatcher.Invoke(() => { CollectionView.Refresh(); });
+                _data = _data.OrderByDescending(x => x.Date).ThenByDescending(x => x.Time).Take(1000).ToHashSet();
+                MainGrid.Dispatcher.Invoke(() => { UpdateList(); MainGrid.ItemsSource = CollectionView; });
             }
             catch (Exception ex)
             {
