@@ -10,6 +10,7 @@ using System.Windows.Data;
 using DataGridExtensions;
 using LiveVol.UI.Service;
 using Microsoft.Extensions.Logging;
+using Syncfusion.Data.Extensions;
 
 namespace LiveVol.UI
 {
@@ -59,9 +60,16 @@ namespace LiveVol.UI
         {
             try
             {
-                data.ForEach(x => _data.Add(x));
-                _data = _data.OrderByDescending(x => x.Date).ThenByDescending(x => x.Time).Take(1000).ToHashSet();
-                MainGrid.Dispatcher.Invoke(() => { UpdateList(); MainGrid.ItemsSource = CollectionView; });
+                data.ForEach(x =>
+                {
+                    _data.Add(x);
+                    if (_data.Count > 1000)
+                        _data.Remove(_data.OrderByDescending(x2 =>x2.Date).ThenByDescending(x2 =>x2.Time).First());
+                });
+                MainGrid.Dispatcher.Invoke(() =>
+                {
+                    MainGrid.Items.Refresh();
+                });
             }
             catch (Exception ex)
             {
