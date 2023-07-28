@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.DirectoryServices;
 using System.Linq;
 using System.Timers;
 using System.Windows;
@@ -13,7 +15,7 @@ namespace LiveVol.UI
     public partial class MainWindow : Window
     {
         private readonly Browser _browser;
-        private readonly HashSet<LiveVolData> _data = new HashSet<LiveVolData>() {};
+        private HashSet<LiveVolData> _data = new HashSet<LiveVolData>() {};
 
         public MainWindow()
         {
@@ -39,10 +41,10 @@ namespace LiveVol.UI
 
         private void _browser_OnRowChanged(List<LiveVolData> data)
         {
-            data.ForEach(x => _data.Add(x));
-
+            //data.ForEach(x => _data.Add(x));
             MainGrid.Dispatcher.Invoke(() =>
             {
+                data.OrderByDescending(x => x.Date).ThenByDescending(x => x.Time).ToList().ForEach(x => _data.Add(x));
                 MainGrid.Items.Refresh();
             });
         }

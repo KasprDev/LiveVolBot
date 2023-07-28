@@ -68,6 +68,8 @@ namespace LiveVol.UI
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NGaF5cXmdCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdgWXhfeHRRRWddVEx0WEQ=");
+
             var mainWindow = _serviceProvider.GetService<MainWindow>();
             mainWindow.Show();
         }

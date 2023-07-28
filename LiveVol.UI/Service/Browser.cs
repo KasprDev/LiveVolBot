@@ -29,7 +29,7 @@ namespace LiveVol.UI.Service
         {
             _config = config;
             _driver = driver;
-            _timer = new Timer { Interval = 800, AutoReset = false };
+            _timer = new Timer { Interval = 500, AutoReset = false };
             _timer.Elapsed += T_Elapsed;
             _logger = logger;
         }
