@@ -3,13 +3,65 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LiveVol.UI"
         xmlns:dgx="urn:tom-englert.de/DataGridExtensions"
         Loaded="MainWindow_OnLoaded"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="MainGrid" dgx:DataGridFilter.IsAutoFilterEnabled="True">
+  
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True" x:Name="MainGrid" ItemsSource="{Binding CollectionView, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"
+                  VirtualizingStackPanel.VirtualizationMode="Standard"
+                  ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                  VirtualizingPanel.ScrollUnit="Pixel"
+                  VirtualizingPanel.IsContainerVirtualizable="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  VirtualizingStackPanel.IsVirtualizing="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Date" Binding="{Binding Date, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Time" Binding="{Binding Time, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Symbol" Binding="{Binding Symbol, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Strike" Binding="{Binding Strike, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Root" Binding="{Binding Root, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Expiration" Binding="{Binding Expiration, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Option" Binding="{Binding Option, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Qty" Binding="{Binding Qty, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="OpenInterest" Binding="{Binding OpenInterest, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="OptionVolume" Binding="{Binding OptionVolume, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TradesCount" Binding="{Binding TradesCount, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TotalTradeNotional" Binding="{Binding TotalTradeNotional, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TotalTradePremium" Binding="{Binding TotalTradePremium, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TotalEdge" Binding="{Binding TotalEdge, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="ExchangeSequenceNumber" Binding="{Binding ExchangeSequenceNumber, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Price" Binding="{Binding Price, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="PriceChange" Binding="{Binding PriceChange, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Theo" Binding="{Binding Theo, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TheoIv" Binding="{Binding TheoIv, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Type" Binding="{Binding Type, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Exchange" Binding="{Binding Exchange, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Condition" Binding="{Binding Condition, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="CancelledCondition" Binding="{Binding CancelledCondition, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Bid" Binding="{Binding Bid, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Ask" Binding="{Binding Ask, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Market" Binding="{Binding Market, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Premium" Binding="{Binding Premium, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="SpotMoneyness" Binding="{Binding SpotMoneyness, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TimeUntilExpiration" Binding="{Binding TimeUntilExpiration, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TradeIv" Binding="{Binding TradeIv, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TradeIvChange" Binding="{Binding TradeIvChange, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TradeDelta" Binding="{Binding TradeDelta, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TradeGamma" Binding="{Binding TradeGamma, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TradeVega" Binding="{Binding TradeVega, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TradeTheta" Binding="{Binding TradeTheta, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="TradeRho" Binding="{Binding TradeRho, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="UnderlyingBid" Binding="{Binding UnderlyingBid, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="UnderlyingAsk" Binding="{Binding UnderlyingAsk, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="MarketUnderlying" Binding="{Binding MarketUnderlying, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="UnderlyingTradePrice" Binding="{Binding UnderlyingTradePrice, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="UnderlyingChangeFromClose" Binding="{Binding UnderlyingChangeFromClose, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="UnderlyingChangeFromOpen" Binding="{Binding UnderlyingChangeFromOpen, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="OnBidAsk" Binding="{Binding OnBidAsk, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn IsReadOnly="True" Header="MarketCondition" Binding="{Binding MarketCondition, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" />
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>
