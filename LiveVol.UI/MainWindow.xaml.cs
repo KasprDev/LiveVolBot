@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.DirectoryServices;
@@ -8,6 +9,7 @@ using System.Windows;
 using System.Windows.Data;
 using DataGridExtensions;
 using LiveVol.UI.Service;
+using Microsoft.Extensions.Logging;
 
 namespace LiveVol.UI
 {
@@ -19,6 +21,7 @@ namespace LiveVol.UI
         private readonly Browser _browser;
         private HashSet<LiveVolData> _data = new HashSet<LiveVolData>() {};
         public ICollectionView CollectionView { get; set; }
+        private readonly ILogger<MainWindow> _logger;
 
         public MainWindow()
         {
@@ -30,8 +33,9 @@ namespace LiveVol.UI
                 new SortDescription("Date", ListSortDirection.Descending));
         }
 
-        public MainWindow(Browser browser):this()
+        public MainWindow(Browser browser, ILogger<MainWindow> logger):this()
         {
+            _logger = logger;
             _browser = browser;
         }
 
@@ -48,11 +52,15 @@ namespace LiveVol.UI
 
         private void _browser_OnRowChanged(List<LiveVolData> data)
         {
-            data.ForEach(x => _data.Add(x));
-            MainGrid.Dispatcher.Invoke(() =>
+            try
             {
-                CollectionView.Refresh();
-            });
+                data.ForEach(x => _data.Add(x));
+                MainGrid.Dispatcher.Invoke(() => { CollectionView.Refresh(); });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error whilst refreshing data.");
+            }
         }
     }
 }

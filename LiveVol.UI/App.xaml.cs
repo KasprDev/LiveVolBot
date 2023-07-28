@@ -7,7 +7,7 @@ using OpenQA.Selenium.Edge;
 
 using System;
 using System.Windows;
-
+using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace LiveVol.UI
@@ -35,6 +35,7 @@ namespace LiveVol.UI
                 .MinimumLevel.Warning()
 #endif 
                 .WriteTo.Console()
+                .WriteTo.Debug()
                 .WriteTo.File("Logs/log.log", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
@@ -42,7 +43,7 @@ namespace LiveVol.UI
                 .AddJsonFile("appsettings.json").Build();
 
             services.AddLogging(bld => bld.AddSerilog(logger));
-            services.AddSingleton(e => new MainWindow(e.GetService<Browser>()));
+            services.AddSingleton(e => new MainWindow(e.GetService<Browser>(), e.GetService<ILogger<MainWindow>>()));
             services.AddSingleton<Browser>();
             services.AddSingleton<IConfiguration>(cfg);
 
